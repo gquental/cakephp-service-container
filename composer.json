@@ -1,0 +1,19 @@
+{
+    "name": "gquental/cakephp-service-container",
+    "description": "Service Container for CakePHP",
+    "type": "cakephp-plugin",
+    "homepage": "https://github.com/gquental/cakephp-service-container",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Guilherme Quental",
+            "email": "guilherme@quent.al"
+        }
+    ],
+    "require": {
+        "composer/installers": "1.0.*"
+    },
+    "extra": {
+        "installer-name": "ServiceContainer"
+    }
+}
