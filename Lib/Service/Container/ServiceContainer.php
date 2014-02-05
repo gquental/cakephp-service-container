@@ -26,7 +26,7 @@ class ServiceContainer {
 	}
 
     private function __initServices() {
-        $this->_services = Configure:read('Services');
+        $this->_services = Configure::read('Services');
 
         if (is_null($this->_services)) {
             throw new ServiceConfigException(array());
