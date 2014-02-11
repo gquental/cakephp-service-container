@@ -54,7 +54,7 @@ class ServiceContainer {
 
     private function __prepareArguments($arguments) {
         foreach ($arguments as $key => $value) {
-            if (strpos($value, self::SERVICE_IDENTIFIER) !== false) {
+            if (substr($value, 0, 1) === self::SERVICE_IDENTIFIER) {
                 $serviceName = str_replace(self::SERVICE_IDENTIFIER, '', $value);
                 $arguments[$key] = $this->getService($serviceName);
             }
