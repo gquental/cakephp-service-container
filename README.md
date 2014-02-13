@@ -114,4 +114,5 @@ class ContactEntity {
 		$this->user = $user;
 		$this->maxPhones = $maxPhones;
 	}
+}
 ```
