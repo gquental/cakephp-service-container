@@ -41,6 +41,7 @@ class ServiceContainer {
 
         $serviceEntry = $this->_services[$serviceName];
 
+        $isVendor = (isset($serviceEntry['isVendor']) && $serviceEntry['isVendor'] === true);
         $serviceClassName = $serviceEntry['name'];
         $serviceClassPath = $serviceEntry['path'];
         $serviceClassArgs = array();
@@ -52,7 +53,8 @@ class ServiceContainer {
         $serviceInstance = $this->__createInstance(
             $serviceClassName,
             $serviceClassPath,
-            $serviceClassArgs
+            $serviceClassArgs,
+            $isVendor
         );
 
         if (!$shouldBeNew) {
@@ -70,14 +72,22 @@ class ServiceContainer {
         }
     }
 
-    private function __createInstance($className, $classPath, $classArgs) {
+    private function __createInstance($className, $classPath, $classArgs, $isVendor) {
         $arguments = $this->__prepareArguments($classArgs);
 
-        App::uses($className, $classPath);
+        $this->__addToClassMap($className, $classPath, $isVendor);
 
         $reflection = new \ReflectionClass($className);
 
         return $reflection->newInstanceArgs($arguments);
+    }
+
+    private function __addToClassMap($className, $classPath, $isVendor) {
+        if ($isVendor) {
+            return App::import('Vendor', $classPath);
+        }
+
+        return App::uses($className, $classPath);
     }
 
     /**
