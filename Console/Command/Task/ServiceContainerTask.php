@@ -1,4 +1,6 @@
 <?php
+App::uses('ServiceContainer', 'ServiceContainer.Lib/Service/Container');
+
 class ServiceContainerTask extends Shell {
     private $__serviceContainer;
 
